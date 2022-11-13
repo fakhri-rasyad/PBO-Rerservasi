@@ -21,9 +21,7 @@ public class MongoController {
                 .append("email", email)
                 .append("password", password);
         if(CheckEmail(email)){
-            MongoClient mongoClient = MongoClients.create(uri);
-            MongoDatabase database = mongoClient.getDatabase("latihan");
-            MongoCollection<Document> collection = database.getCollection("Pengguna");
+            MongoCollection<Document> collection = MongoConnect("Pengguna");
             collection.insertOne(User);
         } else {
             kumpulanError.add("Email telah terpakai!");
@@ -33,18 +31,15 @@ public class MongoController {
     }
 
     public static boolean CheckEmail(String newEmail){
-        MongoClient mongoClient = MongoClients.create(uri);
-        MongoDatabase database = mongoClient.getDatabase("latihan");
-        MongoCollection<Document> collection = database.getCollection("Pengguna");
+        MongoCollection<Document> collection = MongoConnect("Pengguna");
 
         Document found = collection.find(eq("email", newEmail)).first();
         return found == null;
     }
 
     public static boolean CheckPassword(String email, String password){
-        MongoClient mongoClient = MongoClients.create(uri);
-        MongoDatabase database = mongoClient.getDatabase("latihan");
-        MongoCollection<Document> collection = database.getCollection("Pengguna");
+
+        MongoCollection<Document> collection = MongoConnect("Pengguna");
 
         Document found = collection.find(eq("email", email)).first();
         if(Objects.requireNonNull(found).get("password") == password){
@@ -55,16 +50,12 @@ public class MongoController {
         }
     }
 
-    public static FindIterable<Document> daftarPesawat(){
+    public static MongoCollection<Document> MongoConnect(String namaCollection){
         MongoClient mongoClient = MongoClients.create(uri);
         MongoDatabase database = mongoClient.getDatabase("latihan");
-        MongoCollection<Document> collection = database.getCollection("pesawat");
-
-        return collection.find();
+        return database.getCollection(namaCollection);
     }
 
     public static void main(String[] args){
-        FindIterable<Document> listPesawat = daftarPesawat();
-        listPesawat.forEach(doc -> System.out.println(doc.get("nama")));
     }
 }

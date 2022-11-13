@@ -53,7 +53,7 @@
                   </HBox>
                   <ScrollPane prefHeight="483.0" prefWidth="1040.0">
                      <content>
-                        <Pane prefHeight="130.0" prefWidth="996.0">
+                        <Pane fx:id="kontenPesawat" prefHeight="130.0" prefWidth="996.0">
                            <padding>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </padding>
