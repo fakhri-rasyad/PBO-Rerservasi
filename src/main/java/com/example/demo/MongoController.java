@@ -54,6 +54,17 @@ public class MongoController {
             return false;
         }
     }
+
+    public static FindIterable<Document> daftarPesawat(){
+        MongoClient mongoClient = MongoClients.create(uri);
+        MongoDatabase database = mongoClient.getDatabase("latihan");
+        MongoCollection<Document> collection = database.getCollection("pesawat");
+
+        return collection.find();
+    }
+
     public static void main(String[] args){
+        FindIterable<Document> listPesawat = daftarPesawat();
+        listPesawat.forEach(doc -> System.out.println(doc.get("nama")));
     }
 }

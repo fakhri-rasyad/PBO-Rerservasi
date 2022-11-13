@@ -18,7 +18,7 @@ public class loginController {
     @FXML
     private void loginButton() throws IOException {
         checkAkun();
-        App.setRoot("registPage");
+        App.setRoot("mainPage");
     }
 
     private void checkAkun(){
