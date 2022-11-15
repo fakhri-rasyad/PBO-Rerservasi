@@ -22,8 +22,16 @@ public class loginController {
     }
 
     private void checkAkun(){
-            if(!MongoController.CheckPassword(emailField.getText(), passField.getText())){
-                loginError.setText("Password salah!");
+            StringBuilder msg = new StringBuilder();
+
+            if(emailField.getText() == null & passField.getText()==null){
+                msg.append("Email atau password tidak boleh salah\n");
+
             }
+            if(!MongoController.CheckPassword(emailField.getText(), passField.getText())){
+                loginError.setText("Email atau Password salah!\n");
+            }
+
+            loginError.setText(msg.toString());
     }
 }

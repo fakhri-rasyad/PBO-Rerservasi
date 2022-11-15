@@ -10,8 +10,8 @@ import java.util.Objects;
 import static com.mongodb.client.model.Filters.eq;
 
 public class MongoController {
-    static String uri = "mongodb+srv://K4ND4:KRZero-1@cluster0.ll3ytwj.mongodb.net/?retryWrites=true&w=majority";
-
+//    static String uri = "mongodb+srv://K4ND4:KRZero-1@cluster0.ll3ytwj.mongodb.net/?retryWrites=true&w=majority";
+    static String uri = "mongodb://localhost:27017";
     public static List<String> MongoInsertDocument (String firstName, String lastName, String email, String password){
         ArrayList<String> kumpulanError = new ArrayList<>();
         Document User = new Document();
