@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -11,97 +11,34 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.MainPage">
+<AnchorPane prefHeight="360.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.MainPage">
    <children>
-      <BorderPane prefHeight="720.0" prefWidth="1080.0">
+      <BorderPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: caf0f8;">
          <top>
-            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="510.0" BorderPane.alignment="BOTTOM_LEFT">
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="BOTTOM_LEFT">
                <children>
                   <Label alignment="CENTER" text="Airplane Reservation System">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
                   <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="SOMETIMES">
                      <image>
                         <Image url="@account_circle_FILL0_wght400_GRAD0_opsz48.png" />
                      </image></ImageView>
+                  <Button mnemonicParsing="false" text="Button" />
                </children>
                <padding>
-                  <Insets left="20.0" right="10.0" top="20.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
          </top>
-         <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-               <children>
-                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="50.0">
-                     <children>
-                        <Label text="Dari" />
-                        <ChoiceBox prefWidth="150.0" />
-                        <Label text="Menuju" />
-                        <ChoiceBox prefWidth="150.0" />
-                     </children>
-                  </HBox>
-                  <ScrollPane prefHeight="483.0" prefWidth="1040.0">
-                     <content>
-                        <Pane fx:id="kontenPesawat" prefHeight="130.0" prefWidth="996.0">
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                           <children>
-                              <GridPane prefHeight="135.0" prefWidth="999.0" style="-fx-background-color: orange;">
-                                <columnConstraints>
-                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="243.60000610351562" minWidth="10.0" prefWidth="70.80004119873047" />
-                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="429.19995880126953" minWidth="10.0" prefWidth="277.73329467773436" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="420.80000610351556" minWidth="10.0" prefWidth="377.86678466796883" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="244.333251953125" minWidth="10.0" prefWidth="186.73321533203125" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <ImageView fitHeight="90.0" fitWidth="85.0">
-                                       <image>
-                                          <Image url="@account_circle_FILL0_wght400_GRAD0_opsz48.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="Nama Maskapai" GridPane.columnIndex="1">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Fitur Pesawat" GridPane.columnIndex="2">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Harga Tiket" GridPane.columnIndex="3">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </GridPane>
-                           </children>
-                        </Pane>
-                     </content>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </ScrollPane>
-               </children></VBox>
-         </center>
          <bottom>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="960.0" BorderPane.alignment="CENTER">
                <children>
                   <Label alignment="CENTER" text="Copyright @ 2022" />
                </children>
@@ -109,6 +46,41 @@
                   <Insets left="20.0" right="20.0" />
                </padding></HBox>
          </bottom>
+         <center>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <content>
+                  <VBox fx:id="listTiket" prefHeight="394.0" prefWidth="958.0" style="-fx-background-color: #0096c7;">
+                     <children>
+                        <GridPane alignment="CENTER" prefHeight="90.0" prefWidth="720.0" style="-fx-background-color: orange; -fx-border-color: black; -fx-border-radius: 10px;">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="429.19995880126953" minWidth="10.0" prefWidth="209.5333770751953" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="497.2666229248046" minWidth="10.0" prefWidth="497.2666229248046" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="244.333251953125" minWidth="10.0" prefWidth="186.73321533203125" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="Nama Maskapai">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Fitur Pesawat" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>

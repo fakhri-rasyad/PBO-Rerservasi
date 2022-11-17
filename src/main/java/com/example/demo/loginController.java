@@ -21,6 +21,11 @@ public class loginController {
         App.setRoot("mainPage");
     }
 
+    @FXML
+    private void loginButtonToRegister() throws IOException {
+        App.setRoot("registPage");
+    }
+
     private void checkAkun(){
             StringBuilder msg = new StringBuilder();
 

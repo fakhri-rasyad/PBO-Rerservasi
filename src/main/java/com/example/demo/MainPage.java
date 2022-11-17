@@ -4,19 +4,17 @@ import com.mongodb.client.MongoCollection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import org.bson.Document;
 
-import javax.print.Doc;
 
 public class MainPage {
     @FXML
-    private AnchorPane mainPage;
+    private VBox listTiket;
 
     @FXML
-    private Pane kontenPesawat;
+    private Label Maskapai;
 
     public static void tampilkanDaftarPesawat(){
 
@@ -27,12 +25,14 @@ public class MainPage {
             GridPane tiketPesawat = new GridPane();
             Image logoPesawat = new Image("account_circle_FILL0_wght400_GRAD0_opsz48.png");
             Label namaMaskapai = new Label(doc.get("nama").toString());
+            Label hargaMaskapai = new Label("$"+doc.get("Harga").toString());
+            tiketPesawat.add(namaMaskapai,1, 1);
+            tiketPesawat.add(hargaMaskapai, 2, 1);
         });
     }
 
-    public static void main(String[] args){
-        MongoCollection<Document> daftarPesawat = MongoController.MongoConnect("pesawat");
+    public static void main(String[] args) {
+        System.out.println();
 
-        daftarPesawat.find().forEach(document -> System.out.println("Posisi: "+ document.toJson()));
     }
 }

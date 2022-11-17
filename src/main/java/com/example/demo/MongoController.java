@@ -3,6 +3,7 @@ package com.example.demo;
 import com.mongodb.client.*;
 import org.bson.Document;
 
+import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -57,5 +58,19 @@ public class MongoController {
     }
 
     public static void main(String[] args){
+        ArrayList<Tiket> daftarPenerbangan = new ArrayList<>();
+        MongoCollection<Document> daftarPesawat = MongoConnect("pesawat");
+        daftarPesawat.find().forEach(document -> {
+            Tiket tiket = new Tiket();
+            tiket.setMaskapai(document.get("Maskapai").toString());
+            tiket.setMenuju(document.get("Menuju").toString());
+            tiket.setDari(document.get("Dari").toString());
+            tiket.setHarga(document.get("Harga").toString());
+            daftarPenerbangan.add(tiket);
+
+        });
+        for (Tiket tiket : daftarPenerbangan) {
+            System.out.println(tiket.getMaskapai());
+        }
     }
 }
