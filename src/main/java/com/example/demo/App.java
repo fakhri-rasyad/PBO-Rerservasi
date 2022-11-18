@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.mongodb.client.MongoCollection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,12 +24,13 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(loadFXML("loginPage"), 640, 360);
+        scene = new Scene(loadFXML("mainPage"), 960, 540);
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
+
         launch();
     }
 }
