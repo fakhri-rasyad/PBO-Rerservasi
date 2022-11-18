@@ -32,9 +32,6 @@ public class MainPage {
         MongoCollection<Document> provinsi = MongoController.MongoConnect("Provinsi");
         listTiket.setSpacing(20);
 
-        dariComboBox.setValue("Jakarta");
-        menujuComboBox.setValue("Jakarta");
-
         provinsi.find().forEach(document ->
         {
             dariComboBox.getItems().add(String.valueOf(document.get("Provinsi")));
@@ -66,6 +63,12 @@ public class MainPage {
             tiketPesawat.setStyle("-fx-background-color: orange;");
             listTiket.getChildren().add(tiketPesawat);
         });
+    }
+
+    @FXML
+    public void tampilkanTiket(){
+        String asal = dariComboBox.getValue();
+        String tujuan = menujuComboBox.getValue();
     }
 
     public static void main(String[] args) {
