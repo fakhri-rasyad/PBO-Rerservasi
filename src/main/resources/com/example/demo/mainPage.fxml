@@ -24,7 +24,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="SOMETIMES">
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="SOMETIMES" onMouseClicked="#menujuAkunUser">
                      <image>
                         <Image url="@account_circle_FILL0_wght400_GRAD0_opsz48.png" />
                      </image></ImageView>

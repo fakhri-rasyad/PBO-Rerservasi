@@ -1,22 +1,19 @@
 package com.example.demo;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 
-import static com.mongodb.client.model.Filters.eq;
-
+import java.io.IOException;
 
 public class MainPage {
     @FXML
@@ -28,10 +25,12 @@ public class MainPage {
     @FXML
     private ChoiceBox<String> menujuComboBox;
 
+
+
     @FXML
     public void tampilkanDaftarPesawat(){
 
-        MongoCollection<Document> daftarPesawat = MongoController.MongoConnect("pesawat");
+        MongoCollection<Document> daftarPesawat = MongoController.MongoConnect("Pesawat");
         MongoCollection<Document> provinsi = MongoController.MongoConnect("Provinsi");
         listTiket.setSpacing(20);
 
@@ -46,8 +45,11 @@ public class MainPage {
             menujuComboBox.getItems().add(String.valueOf(document.get("Provinsi")));
         });
 
-        Bson comparisonDari = eq("Dari", berangkat);
-        daftarPesawat.find(comparisonDari).limit(5).forEach(doc -> {
+        BasicDBObject kriteria = new BasicDBObject();
+        kriteria.append("Dari", berangkat);
+        kriteria.append("Menuju", tujuan);
+
+        daftarPesawat.find(kriteria).forEach(doc -> {
             GridPane tiketPesawat = new GridPane();
 
             Label namaMaskapai = new Label(String.valueOf(doc.get("Maskapai")));
@@ -78,6 +80,15 @@ public class MainPage {
     public void tampilkanTiket(){
         String asal = dariComboBox.getValue();
         String tujuan = menujuComboBox.getValue();
+    }
+
+    @FXML
+    public void menujuAkunUser(){
+        try {
+            App.setRoot("Pengguna");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void main(String[] args) {
