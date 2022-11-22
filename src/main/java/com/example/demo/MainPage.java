@@ -50,6 +50,12 @@ public class MainPage {
         kriteria.append("Menuju", tujuan);
 
         daftarPesawat.find(kriteria).forEach(doc -> {
+            Tiket tiketBaru = new Tiket();
+            tiketBaru.setMaskapai(String.valueOf(doc.get("Maskapai")));
+            tiketBaru.setDari(String.valueOf(doc.get("Dari")));
+            tiketBaru.setMenuju(String.valueOf(doc.get("Menuju")));
+            tiketBaru.setHarga(String.valueOf(doc.get("Harga")));
+
             GridPane tiketPesawat = new GridPane();
 
             Label namaMaskapai = new Label(String.valueOf(doc.get("Maskapai")));
@@ -73,6 +79,19 @@ public class MainPage {
 
             tiketPesawat.setStyle("-fx-background-color: orange;");
             listTiket.getChildren().add(tiketPesawat);
+            tiketPesawat.setOnMouseClicked(e ->{
+                MongoCollection<Document> daftarTiket = MongoController.MongoConnect("Tiket");
+                Document newTiket = new Document();
+                newTiket
+                        .append("id", 10)
+                        .append("Nama Maskapai", tiketBaru.getMaskapai())
+                        .append("Dari", tiketBaru.getDari())
+                        .append("Menuju", tiketBaru.getMenuju())
+                        .append("Harga", "$" + tiketBaru.getHarga());
+                daftarTiket.insertOne(newTiket);
+                System.out.println(newTiket);
+                System.out.println("Ditambahkan");
+            });
         });
     }
 
