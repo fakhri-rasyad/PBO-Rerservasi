@@ -13,6 +13,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.bson.Document;
+import org.bson.conversions.Bson;
+
+import static com.mongodb.client.model.Filters.eq;
 
 
 public class MainPage {
@@ -32,21 +35,27 @@ public class MainPage {
         MongoCollection<Document> provinsi = MongoController.MongoConnect("Provinsi");
         listTiket.setSpacing(20);
 
+        listTiket.getChildren().clear();
+
+        String tujuan = menujuComboBox.getValue();
+        String berangkat = dariComboBox.getValue();
+
         provinsi.find().forEach(document ->
         {
             dariComboBox.getItems().add(String.valueOf(document.get("Provinsi")));
             menujuComboBox.getItems().add(String.valueOf(document.get("Provinsi")));
         });
 
-        daftarPesawat.find().limit(5).forEach(doc -> {
+        Bson comparisonDari = eq("Dari", berangkat);
+        daftarPesawat.find(comparisonDari).limit(5).forEach(doc -> {
             GridPane tiketPesawat = new GridPane();
 
-            Label namaMaskapai = new Label("Maskapai");
-            namaMaskapai.setFont(Font.font("Arial", 18));
-            Label hargaMaskapai = new Label("Harga");
-            hargaMaskapai.setFont(Font.font("Arial", 18));
-            Label fiturMaskapai = new Label("Fitur Maskapai");
-            fiturMaskapai.setFont(Font.font("Arial", 18));
+            Label namaMaskapai = new Label(String.valueOf(doc.get("Maskapai")));
+            namaMaskapai.setFont(Font.font("Arial", 14));
+            Label hargaMaskapai = new Label(String.valueOf(doc.get("Dari")));
+            hargaMaskapai.setFont(Font.font("Arial", 14));
+            Label fiturMaskapai = new Label(String.valueOf(doc.get("Menuju")));
+            fiturMaskapai.setFont(Font.font("Arial", 14));
 
             tiketPesawat.add(namaMaskapai,1, 1);
             tiketPesawat.add(hargaMaskapai, 2, 1);

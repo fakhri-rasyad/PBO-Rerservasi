@@ -58,10 +58,10 @@
          <left>
             <VBox prefHeight="396.0" prefWidth="146.0" spacing="20.0" style="-fx-background-color: #48cae4;" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Label" />
-                  <ChoiceBox fx:id="dariComboBox" prefWidth="150.0" value="Jakarta"/>
-                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
-                  <ChoiceBox fx:id="menujuComboBox" layoutX="20.0" layoutY="59.0" prefWidth="150.0" value="Jakarta" onAction="#tampilkanTiket"/>
+                  <Label text="Dari" />
+                  <ChoiceBox fx:id="dariComboBox" prefWidth="150.0" onAction="#tampilkanDaftarPesawat" value="DKI Jakarta" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Menuju" />
+                  <ChoiceBox fx:id="menujuComboBox" layoutX="20.0" layoutY="59.0" onAction="#tampilkanDaftarPesawat" prefWidth="150.0" value="DKI Jakarta" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
