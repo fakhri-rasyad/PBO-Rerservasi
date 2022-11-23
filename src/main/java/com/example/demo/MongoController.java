@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import org.bson.Document;
 
@@ -38,15 +39,18 @@ public class MongoController {
         return found == null;
     }
 
-    public static boolean CheckPassword(String email, String password){
+    public static boolean CheckPassword(String email, String password) {
 
         MongoCollection<Document> collection = MongoConnect("Pengguna");
 
-        Document found = collection.find(eq("email", email)).first();
-        if(Objects.requireNonNull(found).get("password") == password){
-            System.out.println("Password cocok");
+        BasicDBObject checkAkun = new BasicDBObject();
+        checkAkun.append("email", email)
+                .append("password", password);
+        Document found = collection.find(checkAkun).first();
+        if (found == null) {
+            System.out.println("Akun tidak ditemukan");
             return true;
-        }else{
+        } else{
             return false;
         }
     }

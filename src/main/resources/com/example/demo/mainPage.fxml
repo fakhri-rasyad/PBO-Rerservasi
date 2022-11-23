@@ -28,6 +28,7 @@
                      <image>
                         <Image url="@account_circle_FILL0_wght400_GRAD0_opsz48.png" />
                      </image></ImageView>
+
                   <Button mnemonicParsing="false" onAction="#tampilkanDaftarPesawat" text="Button" />
                </children>
                <padding>

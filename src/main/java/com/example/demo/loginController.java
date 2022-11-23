@@ -17,27 +17,25 @@ public class loginController {
     private Label loginError;
 
     @FXML
-    private void loginButton() throws IOException {
-        checkAkun();
-        App.setRoot("mainPage");
-    }
-
-    @FXML
     private void loginButtonToRegister() throws IOException {
         App.setRoot("registPage");
     }
 
-    private void checkAkun(){
+    @FXML
+    private void loginButton() throws IOException {
             StringBuilder msg = new StringBuilder();
 
-            if(emailField.getText() == null & passField.getText()==null){
-                msg.append("Email atau password tidak boleh salah\n");
-
-            }
-            if(!MongoController.CheckPassword(emailField.getText(), passField.getText())){
-                loginError.setText("Email atau Password salah!\n");
+            if(emailField.getText().equals("") & passField.getText().equals("")){
+                msg.append("Email atau password tidak boleh Kosong\n");
+            } else if(MongoController.CheckPassword(emailField.getText(), passField.getText())){
+                msg.append("Email atau Password salah!\n");
             }
 
             loginError.setText(msg.toString());
+
+            if(msg.length() == 0){
+                MainPage.userEmail = emailField.getText();
+                App.setRoot("mainPage");
+            }
     }
 }

@@ -6,6 +6,16 @@ public class Tiket {
     private String Menuju;
     private String Harga;
 
+    private String ikonMaskapai;
+
+    public String getIkonMaskapai(){
+        return ikonMaskapai;
+    }
+
+    public void setIkonMaskapai(String ikonMaskapai){
+        this.ikonMaskapai = ikonMaskapai;
+    }
+
     public String getMaskapai() {
         return Maskapai;
     }
