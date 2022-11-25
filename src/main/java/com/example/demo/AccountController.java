@@ -51,6 +51,8 @@ public class AccountController {
             iconHapus.setOnMouseClicked(e -> {
                 ticketBox.getChildren().remove(iconHapus.getParent());
 
+                popUp.Display("Penghapusan");
+
                 Document deletedTicket = new Document();
                 deletedTicket
                         .append("Email", MainPage.userEmail)

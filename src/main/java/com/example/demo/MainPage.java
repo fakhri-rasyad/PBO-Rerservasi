@@ -13,11 +13,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.bson.Document;
 
-import javax.print.Doc;
 import java.io.IOException;
 import java.util.Random;
 
-import static com.mongodb.client.model.Filters.eq;
 
 public class MainPage {
 
@@ -34,29 +32,21 @@ public class MainPage {
 
 
     @FXML
-    public void tampilkanDaftarPesawat(){
+    public void tampilkanDaftarPesawat(String tujuan, String berangkat){
         Random pembuatIdTransaksi = new Random();
 
         MongoCollection<Document> daftarPesawat = MongoController.MongoConnect("Pesawat");
-        MongoCollection<Document> provinsi = MongoController.MongoConnect("Provinsi");
+
         listTiket.setSpacing(20);
 
         listTiket.getChildren().clear();
-
-        String tujuan = menujuComboBox.getValue();
-        String berangkat = dariComboBox.getValue();
-
-        provinsi.find().forEach(document ->
-        {
-            dariComboBox.getItems().add(String.valueOf(document.get("Provinsi")));
-            menujuComboBox.getItems().add(String.valueOf(document.get("Provinsi")));
-        });
 
         BasicDBObject kriteria = new BasicDBObject();
         kriteria.append("Dari", berangkat);
         kriteria.append("Menuju", tujuan);
 
         daftarPesawat.find(kriteria).forEach(doc -> {
+
             Tiket tiketBaru = new Tiket();
 
             tiketBaru.setIdTransaksi(pembuatIdTransaksi.nextInt(10000000));
@@ -75,7 +65,7 @@ public class MainPage {
             Label namaMaskapai = new Label(String.valueOf(doc.get("Maskapai")));
             namaMaskapai.setFont(Font.font("Arial", 18));
 
-            Label hargaMaskapai = new Label(String.valueOf(doc.get("Harga")));
+            Label hargaMaskapai = new Label("$" + doc.get("Harga"));
             hargaMaskapai.setFont(Font.font("Arial", 18));
 
             tiketPesawat.add(ikonPesawat, 0, 1);
@@ -90,7 +80,7 @@ public class MainPage {
             tiketPesawat.getColumnConstraints().add(new ColumnConstraints(360));
             tiketPesawat.getColumnConstraints().add(new ColumnConstraints(180));
 
-            tiketPesawat.setStyle("-fx-background-color: orange;");
+            tiketPesawat.setStyle("-fx-background-color: #81c3d7;");
 
             listTiket.getChildren().add(tiketPesawat);
             tiketPesawat.setOnMouseClicked(e ->{
@@ -105,8 +95,16 @@ public class MainPage {
                         .append("Menuju", tiketBaru.getMenuju())
                         .append("Harga", "$" + tiketBaru.getHarga());
                 daftarTiket.insertOne(newTiket);
+
+                popUp.Display("Transaksi");
             });
         });
+    }
+
+    public void setAksiComboBox(){
+        dariComboBox.setOnAction(event -> tampilkanDaftarPesawat(dariComboBox.getValue(), menujuComboBox.getValue()));
+
+        menujuComboBox.setOnAction(event -> tampilkanDaftarPesawat(dariComboBox.getValue(), menujuComboBox.getValue()));
     }
 
     @FXML
@@ -118,4 +116,16 @@ public class MainPage {
         }
     }
 
+    public void initialize(){
+        MongoCollection<Document> provinsi = MongoController.MongoConnect("Provinsi");
+
+        provinsi.find().forEach(document ->
+        {
+            dariComboBox.getItems().add(String.valueOf(document.get("Provinsi")));
+            menujuComboBox.getItems().add(String.valueOf(document.get("Provinsi")));
+        });
+
+        setAksiComboBox();
+
+    }
 }

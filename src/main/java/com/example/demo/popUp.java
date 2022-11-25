@@ -6,20 +6,20 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
-public class purchasePopUp {
+public class popUp {
 
-    public static void Display(){
+    public static void Display(String events){
         Stage purchasePopUp = new Stage();
         purchasePopUp.initModality(Modality.APPLICATION_MODAL);
-        purchasePopUp.setTitle("Transaksi Sukses");
+        purchasePopUp.setTitle( events + " sukses");
 
-        Label label1 = new Label("Transaksi Sukses");
+        Label label1 = new Label( events + " sukses");
 
         Button button1= new Button("Kembali");
 
         button1.setOnAction(e -> purchasePopUp.close());
 
-        VBox layout = new VBox();
+        VBox layout = new VBox(20);
 
         layout.getChildren().addAll(label1, button1);
 
