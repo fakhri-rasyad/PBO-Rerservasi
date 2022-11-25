@@ -2,7 +2,6 @@ package com.example.demo;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Filters;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -13,12 +12,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import org.bson.Document;
 
-import static com.mongodb.client.model.Filters.eq;
+import java.io.IOException;
+
 
 public class AccountController {
 
     @FXML
     private VBox ticketBox;
+
+    @FXML
+    public static Label userName;
+
+    @FXML
+    public static Label userEmail;
     public void loadTiket(){
         MongoCollection<Document> tiketPengguna = MongoController.MongoConnect("Tiket");
         BasicDBObject idPengguna = new BasicDBObject();
@@ -44,9 +50,13 @@ public class AccountController {
             iconHapus.setPreserveRatio(true);
             iconHapus.setOnMouseClicked(e -> {
                 ticketBox.getChildren().remove(iconHapus.getParent());
-                BasicDBObject filterDelete = new BasicDBObject();
 
-                tiketPengguna.deleteOne(eq("Harga", String.valueOf(doc.get("Harga"))));
+                Document deletedTicket = new Document();
+                deletedTicket
+                        .append("Email", MainPage.userEmail)
+                        .append("idTransaksi",doc.get("idTransaksi"));
+
+                tiketPengguna.deleteOne(deletedTicket);
             });
 
             GridPane ticket = new GridPane();
@@ -69,6 +79,15 @@ public class AccountController {
 
             ticketBox.getChildren().add(ticket);
         });
+    }
+
+    @FXML
+    public void kembaliKeMenuUtama(){
+        try {
+            App.setRoot("MainPage");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

@@ -1,12 +1,21 @@
 package com.example.demo;
 
 public class Tiket {
+    private int idTransaksi;
     private String Maskapai;
     private String Dari;
     private String Menuju;
     private String Harga;
 
     private String ikonMaskapai;
+
+    public int getIdTransaksi() {
+        return idTransaksi;
+    }
+
+    public void setIdTransaksi(int idTransaksi) {
+        this.idTransaksi = idTransaksi;
+    }
 
     public String getIkonMaskapai(){
         return ikonMaskapai;

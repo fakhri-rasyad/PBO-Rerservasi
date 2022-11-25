@@ -13,7 +13,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.bson.Document;
 
+import javax.print.Doc;
 import java.io.IOException;
+import java.util.Random;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class MainPage {
 
@@ -31,6 +35,7 @@ public class MainPage {
 
     @FXML
     public void tampilkanDaftarPesawat(){
+        Random pembuatIdTransaksi = new Random();
 
         MongoCollection<Document> daftarPesawat = MongoController.MongoConnect("Pesawat");
         MongoCollection<Document> provinsi = MongoController.MongoConnect("Provinsi");
@@ -54,6 +59,7 @@ public class MainPage {
         daftarPesawat.find(kriteria).forEach(doc -> {
             Tiket tiketBaru = new Tiket();
 
+            tiketBaru.setIdTransaksi(pembuatIdTransaksi.nextInt(10000000));
             tiketBaru.setIkonMaskapai(String.valueOf(doc.get("Ikon")));
             tiketBaru.setMaskapai(String.valueOf(doc.get("Maskapai")));
             tiketBaru.setDari(String.valueOf(doc.get("Dari")));
@@ -91,6 +97,7 @@ public class MainPage {
                 MongoCollection<Document> daftarTiket = MongoController.MongoConnect("Tiket");
                 Document newTiket = new Document();
                 newTiket
+                        .append("idTransaksi", tiketBaru.getIdTransaksi())
                         .append("Email", userEmail)
                         .append("Ikon", tiketBaru.getIkonMaskapai())
                         .append("Nama Maskapai", tiketBaru.getMaskapai())
@@ -98,8 +105,6 @@ public class MainPage {
                         .append("Menuju", tiketBaru.getMenuju())
                         .append("Harga", "$" + tiketBaru.getHarga());
                 daftarTiket.insertOne(newTiket);
-                System.out.println(newTiket);
-                System.out.println("Ditambahkan");
             });
         });
     }
@@ -113,7 +118,4 @@ public class MainPage {
         }
     }
 
-    public static void main(String[] args) {
-
-    }
 }

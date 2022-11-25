@@ -4,10 +4,8 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import org.bson.Document;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -61,7 +59,4 @@ public class MongoController {
         return database.getCollection(namaCollection);
     }
 
-    public static void main(String[] args){
-
-    }
 }
