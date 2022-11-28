@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class loginController {
+public class LoginController {
 
     @FXML
     private TextField emailField;
@@ -28,13 +28,13 @@ public class loginController {
             if(emailField.getText().equals("") & passField.getText().equals("")){
                 msg.append("Email atau password tidak boleh Kosong\n");
             } else if(MongoController.CheckPassword(emailField.getText(), passField.getText())){
-                msg.append("Email atau Password salah!\n");
+                msg.append("Akun tidak ditemukan!\n");
             }
 
             loginError.setText(msg.toString());
 
             if(msg.length() == 0){
-                MainPage.userEmail = emailField.getText();
+                MainController.userEmail = emailField.getText();
                 App.setRoot("mainPage");
             }
     }

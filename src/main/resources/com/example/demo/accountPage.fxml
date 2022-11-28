@@ -13,48 +13,45 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #3a7ca5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AccountController">
-   <children>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0">
+<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #3a7ca5;"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo.AccountController">
+    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+              prefHeight="540.0" prefWidth="960.0">
         <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="680.0" minWidth="10.0" prefWidth="680.0" />
-          <ColumnConstraints hgrow="NEVER" maxWidth="320.0" minWidth="10.0" prefWidth="280.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="720.0" minWidth="10.0"
+                               prefWidth="720.0"/>
+            <ColumnConstraints hgrow="NEVER" maxWidth="240.0" minWidth="10.0" prefWidth="240.0"/>
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         </rowConstraints>
-         <children>
-            <ScrollPane prefHeight="200.0" prefWidth="200.0">
-               <content>
-                  <VBox fx:id="ticketBox" alignment="TOP_CENTER" prefWidth="680.0" spacing="10.0" style="-fx-background-color: #3a7ca5;">
-                     <padding>
-                        <Insets left="10.0" top="10.0" />
-                     </padding></VBox>
-               </content>
-            </ScrollPane>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="63.0" spacing="40.0" GridPane.columnIndex="1">
-               <children>
-                  <Label fx:id="userName" text="Nama Pengguna">
-                     <font>
-                        <Font name="Times New Roman Bold" size="24.0" />
-                     </font></Label>
-                  <ImageView fitHeight="81.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@account_circle_FILL0_wght400_GRAD0_opsz48.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="userEmail" text="Email">
-                     <font>
-                        <Font name="Times New Roman" size="18.0" />
-                     </font></Label>
-                  <Button mnemonicParsing="false" onAction="#loadTiket" text="Daftar Tiket Anda" />
-                  <Button mnemonicParsing="false" onAction="#kembaliKeMenuUtama" text="Kembali Ke Menu Utama" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
-               </padding>
+        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+            <VBox fx:id="ticketBox" alignment="TOP_CENTER" prefWidth="720.0" spacing="10.0"
+                  style="-fx-background-color: #16425b;">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                </padding>
             </VBox>
-         </children>
-      </GridPane>
-   </children>
+        </ScrollPane>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="63.0" spacing="40.0" GridPane.columnIndex="1">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="20.0"/>
+            </padding>
+            <Label fx:id="userName" text="Nama Pengguna">
+                <font>
+                    <Font name="Times New Roman Bold" size="24.0"/>
+                </font>
+            </Label>
+            <ImageView fitHeight="81.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@account_circle_FILL0_wght400_GRAD0_opsz48.png"/>
+            </ImageView>
+            <Label fx:id="userEmail" text="Email">
+                <font>
+                    <Font name="Times New Roman" size="18.0"/>
+                </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#kembaliKeMenuUtama" text="Kembali Ke Menu Utama"/>
+        </VBox>
+    </GridPane>
 </AnchorPane>

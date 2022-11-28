@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.util.List;
 
-public class registController {
+public class RegistController {
 
 
     @FXML
@@ -15,11 +15,14 @@ public class registController {
     @FXML
     private TextField frontNameFieldRegist;
 
-    @FXML TextField lastNameFieldRegist;
+    @FXML
+    private TextField lastNameFieldRegist;
 
-    @FXML TextField emailFieldRegist;
+    @FXML
+    private TextField emailFieldRegist;
 
-    @FXML TextField passFieldRegist;
+    @FXML
+    private TextField passFieldRegist;
 
     @FXML
      public void registButton() throws  IOException{

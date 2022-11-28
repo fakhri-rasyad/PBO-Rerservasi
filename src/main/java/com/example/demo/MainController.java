@@ -17,17 +17,17 @@ import java.io.IOException;
 import java.util.Random;
 
 
-public class MainPage {
+public class MainController {
 
     public static String userEmail;
     @FXML
     private VBox listTiket;
 
     @FXML
-    private ChoiceBox<String> dariComboBox;
+    private ChoiceBox<String> dariChoiceBox;
 
     @FXML
-    private ChoiceBox<String> menujuComboBox;
+    private ChoiceBox<String> menujuChoiceBox;
 
 
 
@@ -63,27 +63,16 @@ public class MainPage {
             ikonPesawat.setPreserveRatio(true);
 
             Label namaMaskapai = new Label(String.valueOf(doc.get("Maskapai")));
-            namaMaskapai.setFont(Font.font("Arial", 18));
+            namaMaskapai.setFont(Font.font("Arial", 14));
 
             Label hargaMaskapai = new Label("$" + doc.get("Harga"));
-            hargaMaskapai.setFont(Font.font("Arial", 18));
+            hargaMaskapai.setFont(Font.font("Arial", 14));
 
-            tiketPesawat.add(ikonPesawat, 0, 1);
-            tiketPesawat.add(namaMaskapai,1, 1);
-            tiketPesawat.add(hargaMaskapai, 2, 1);
+            ImageView ikonBelanja = new ImageView("com/example/demo/shopping_cart_FILL0_wght400_GRAD0_opsz48.png");
+            ikonPesawat.setFitWidth(64);
+            ikonPesawat.setPreserveRatio(true);
 
-            tiketPesawat.setMinWidth(720);
-            tiketPesawat.setMinHeight(90);
-            tiketPesawat.setAlignment(Pos.CENTER);
-
-            tiketPesawat.getColumnConstraints().add(new ColumnConstraints(180));
-            tiketPesawat.getColumnConstraints().add(new ColumnConstraints(360));
-            tiketPesawat.getColumnConstraints().add(new ColumnConstraints(180));
-
-            tiketPesawat.setStyle("-fx-background-color: #81c3d7;");
-
-            listTiket.getChildren().add(tiketPesawat);
-            tiketPesawat.setOnMouseClicked(e ->{
+            ikonBelanja.setOnMouseClicked(e -> {
                 MongoCollection<Document> daftarTiket = MongoController.MongoConnect("Tiket");
                 Document newTiket = new Document();
                 newTiket
@@ -95,16 +84,33 @@ public class MainPage {
                         .append("Menuju", tiketBaru.getMenuju())
                         .append("Harga", "$" + tiketBaru.getHarga());
                 daftarTiket.insertOne(newTiket);
-
-                popUp.Display("Transaksi");
+                PopUp.Display("Transaksi");
             });
+
+            tiketPesawat.add(ikonPesawat, 0,1 );
+            tiketPesawat.add(namaMaskapai,1, 1);
+            tiketPesawat.add(hargaMaskapai, 2, 1);
+            tiketPesawat.add(ikonBelanja, 3, 1);
+
+            tiketPesawat.setMinWidth(720);
+            tiketPesawat.setMinHeight(90);
+            tiketPesawat.setAlignment(Pos.CENTER);
+
+            tiketPesawat.getColumnConstraints().add(new ColumnConstraints(144));
+            tiketPesawat.getColumnConstraints().add(new ColumnConstraints(216));
+            tiketPesawat.getColumnConstraints().add(new ColumnConstraints(216));
+            tiketPesawat.getColumnConstraints().add(new ColumnConstraints(144));
+
+            tiketPesawat.setStyle("-fx-background-color: #81c3d7;");
+
+            listTiket.getChildren().add(tiketPesawat);
         });
     }
 
-    public void setAksiComboBox(){
-        dariComboBox.setOnAction(event -> tampilkanDaftarPesawat(dariComboBox.getValue(), menujuComboBox.getValue()));
+    public void setAksiChoiceBox(){
+        dariChoiceBox.setOnAction(event -> tampilkanDaftarPesawat(dariChoiceBox.getValue(), menujuChoiceBox.getValue()));
 
-        menujuComboBox.setOnAction(event -> tampilkanDaftarPesawat(dariComboBox.getValue(), menujuComboBox.getValue()));
+        menujuChoiceBox.setOnAction(event -> tampilkanDaftarPesawat(dariChoiceBox.getValue(), menujuChoiceBox.getValue()));
     }
 
     @FXML
@@ -121,11 +127,11 @@ public class MainPage {
 
         provinsi.find().forEach(document ->
         {
-            dariComboBox.getItems().add(String.valueOf(document.get("Provinsi")));
-            menujuComboBox.getItems().add(String.valueOf(document.get("Provinsi")));
+            dariChoiceBox.getItems().add(String.valueOf(document.get("Provinsi")));
+            menujuChoiceBox.getItems().add(String.valueOf(document.get("Provinsi")));
         });
 
-        setAksiComboBox();
+        setAksiChoiceBox();
 
     }
 }

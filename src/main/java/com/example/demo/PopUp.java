@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
-public class popUp {
+public class PopUp {
 
     public static void Display(String events){
         Stage purchasePopUp = new Stage();
@@ -25,7 +25,7 @@ public class popUp {
 
         layout.setAlignment(Pos.CENTER);
 
-        Scene popUp = new Scene(layout, 300, 250);
+        Scene popUp = new Scene(layout, 200, 150);
 
         purchasePopUp.setScene(popUp);
 

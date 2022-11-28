@@ -25,11 +25,22 @@ public class AccountController {
 
     @FXML
     public static Label userEmail;
-    public void loadTiket(){
+
+    @FXML
+    public void kembaliKeMenuUtama(){
+        try {
+            App.setRoot("MainPage");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public void initialize() {
         MongoCollection<Document> tiketPengguna = MongoController.MongoConnect("Tiket");
         BasicDBObject idPengguna = new BasicDBObject();
-        idPengguna.append("Email", MainPage.userEmail);
-        tiketPengguna.find(idPengguna).forEach(doc ->{
+        idPengguna.append("Email", MainController.userEmail);
+        tiketPengguna.find(idPengguna).forEach(doc -> {
 
             Label maskapai = new Label(String.valueOf(doc.get("Nama Maskapai")));
             maskapai.setFont(Font.font(12));
@@ -51,12 +62,12 @@ public class AccountController {
             iconHapus.setOnMouseClicked(e -> {
                 ticketBox.getChildren().remove(iconHapus.getParent());
 
-                popUp.Display("Penghapusan");
+                PopUp.Display("Penghapusan");
 
                 Document deletedTicket = new Document();
                 deletedTicket
-                        .append("Email", MainPage.userEmail)
-                        .append("idTransaksi",doc.get("idTransaksi"));
+                        .append("Email", MainController.userEmail)
+                        .append("idTransaksi", doc.get("idTransaksi"));
 
                 tiketPengguna.deleteOne(deletedTicket);
             });
@@ -65,7 +76,7 @@ public class AccountController {
             ticket.setMinWidth(500);
             ticket.setMinHeight(100);
             ticket.setAlignment(Pos.CENTER);
-            ticket.setStyle("-fx-background-color: #2f6690");
+            ticket.setStyle("-fx-background-color: #81c3d7");
 
             ticket.getColumnConstraints().add(new ColumnConstraints(100));
             ticket.getColumnConstraints().add(new ColumnConstraints(170));
@@ -82,14 +93,4 @@ public class AccountController {
             ticketBox.getChildren().add(ticket);
         });
     }
-
-    @FXML
-    public void kembaliKeMenuUtama(){
-        try {
-            App.setRoot("MainPage");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }
