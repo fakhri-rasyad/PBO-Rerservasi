@@ -20,6 +20,8 @@ import java.util.Random;
 public class MainController {
 
     public static String userEmail;
+
+    public static String userName;
     @FXML
     private VBox listTiket;
 
@@ -124,6 +126,12 @@ public class MainController {
 
     public void initialize(){
         MongoCollection<Document> provinsi = MongoController.MongoConnect("Provinsi");
+        MongoCollection<Document> listPengguna = MongoController.MongoConnect("Pengguna");
+
+        BasicDBObject pengguna = new BasicDBObject();
+        pengguna.append("email", userEmail);
+
+        listPengguna.find(pengguna).forEach(doc -> userName = doc.get("firstName") + " " + doc.get("lastName"));
 
         provinsi.find().forEach(document ->
         {
@@ -133,5 +141,6 @@ public class MainController {
 
         setAksiChoiceBox();
 
+        System.out.println(userName);
     }
 }

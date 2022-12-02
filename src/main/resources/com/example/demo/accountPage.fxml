@@ -46,11 +46,6 @@
             <ImageView fitHeight="81.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@account_circle_FILL0_wght400_GRAD0_opsz48.png"/>
             </ImageView>
-            <Label fx:id="userEmail" text="Email">
-                <font>
-                    <Font name="Times New Roman" size="18.0"/>
-                </font>
-            </Label>
             <Button mnemonicParsing="false" onAction="#kembaliKeMenuUtama" text="Kembali Ke Menu Utama"/>
         </VBox>
     </GridPane>

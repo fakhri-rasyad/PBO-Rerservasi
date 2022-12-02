@@ -21,7 +21,7 @@ public class AccountController {
     private VBox ticketBox;
 
     @FXML
-    public static Label userName;
+    public Label userName;
 
     @FXML
     public static Label userEmail;
@@ -40,6 +40,7 @@ public class AccountController {
         MongoCollection<Document> tiketPengguna = MongoController.MongoConnect("Tiket");
         BasicDBObject idPengguna = new BasicDBObject();
         idPengguna.append("Email", MainController.userEmail);
+        userName.setText(MainController.userName);
         tiketPengguna.find(idPengguna).forEach(doc -> {
 
             Label maskapai = new Label(String.valueOf(doc.get("Nama Maskapai")));
